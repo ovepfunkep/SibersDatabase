@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SibersDatabase.Views.EmployeePages.EmployeesViewPage"
+             Title="List of employees"
+             x:Name="EmployeesView">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <SearchBar Grid.Row="1" 
+                           TextChanged="SearchBar_TextChanged"
+                           BackgroundColor="White"/>
+                <CollectionView x:Name="collectionView"
+                                Grid.Row="2" 
+                                SelectionMode="Single"
+                                SelectionChanged="collectionView_SelectionChangedAsync"
+                                BackgroundColor="Wheat">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="5"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout BackgroundColor="CornflowerBlue">
+                                <Label>
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}.{2}.">
+                                            <Binding Path="Surname"/>
+                                            <Binding Path="Name[0]"/>
+                                            <Binding Path="MiddleName[0]"/>
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+            <Button Text="+" FontAttributes="Bold" TextColor="White" FontSize="35" BackgroundColor="LightSkyBlue"
+                    CornerRadius="100" WidthRequest="70" HeightRequest="70" 
+                    AbsoluteLayout.LayoutBounds="300,580" 
+                    Clicked="AddButton_ClickedAsync"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

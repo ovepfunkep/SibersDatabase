@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SibersDatabase.Views.EmployeePages.EmployeesSelectingPage"
+             Title="{Binding Choosing}">
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar TextChanged="SearchBar_TextChanged"/>
+            <CollectionView x:Name="employees"
+                            ItemsSource="{Binding ItemsCollectionShown, Mode=TwoWay}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout BackgroundColor="CornflowerBlue" 
+                                     Orientation="Horizontal">
+                            <CheckBox x:Name="checkBox"
+                                      IsChecked="{Binding IsChecked}"
+                                      CheckedChanged="checkBox_CheckedChanged"/>
+                            <Label x:Name="label" 
+                                   BindingContext="{Binding Employee}">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}.{2}.">
+                                        <Binding Path="Surname"/>
+                                        <Binding Path="Name[0]"/>
+                                        <Binding Path="MiddleName[0]"/>
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Save"
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    Clicked="ButtonSave_ClickedAsync"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

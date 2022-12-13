@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:employeeViews="clr-namespace:SibersDatabase.Views.EmployeePages"
+       xmlns:projectViews="clr-namespace:SibersDatabase.Views.ProjectPages"
+       Title="WorkWithDataBase"
+       x:Class="SibersDatabase.AppShell"
+       x:Name="shell">
+
+    <TabBar>
+        <ShellContent 
+            Title="Employees" 
+            Icon="Employee.png" 
+            ContentTemplate="{DataTemplate employeeViews:EmployeesViewPage}"/>
+        
+        <ShellContent 
+            Title="Projects" 
+            Icon="Project.png" 
+            ContentTemplate="{DataTemplate projectViews:ProjectsViewPage}"/>
+    </TabBar>
+</Shell>

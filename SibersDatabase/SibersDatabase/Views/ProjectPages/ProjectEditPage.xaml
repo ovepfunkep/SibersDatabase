@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SibersDatabase.Views.ProjectPages.ProjectEditPage"
+             Title="Project editing"
+             NavigationPage.HasBackButton="False"
+             x:Name="ProjectEdit">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding GoBackCommand}"/>
+    </Shell.BackButtonBehavior>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save"
+                     Clicked="Save_ClickedAsync"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="StackLayout">
+                <Setter Property="Spacing" Value="0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView x:Name="pageContent">
+            <Grid RowDefinitions="Auto,*" 
+                  Margin="10" 
+                  RowSpacing="0">
+                <StackLayout Grid.Row="0">
+                    <Label Text="Name" 
+                           FontFamily="Comfortaa"/>
+                    <Editor Text="{Binding Name}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1">
+                    <Label Text="Customer"/>
+                    <Editor Text="{Binding CustomerCompanyName}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="2">
+                    <Label Text="Contractor"/>
+                    <Editor Text="{Binding ConctractorCompanyName}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="3">
+                    <Label Text="Head of the project"/>
+                    <Editor x:Name="headEditor" 
+                            Focused="headEditor_FocusedAsync">
+                        <Editor.Text>
+                            <MultiBinding StringFormat="{}{0} {1} {2}">
+                                <Binding Path="Surname"/>
+                                <Binding Path="Name"/>
+                                <Binding Path="MiddleName"/>
+                            </MultiBinding>
+                        </Editor.Text>
+                    </Editor>
+                </StackLayout>
+                <StackLayout Grid.Row="4">
+                    <Label Text="Employees in project"/>
+                    <Editor x:Name="employeesEditor"
+                            Focused="employeesEditor_FocusedAsync">
+                        <Editor.Text>
+                            <MultiBinding StringFormat="{}{0} employees">
+                                <Binding Path="Text"/>
+                            </MultiBinding>
+                        </Editor.Text>
+                    </Editor>
+                </StackLayout>
+                <StackLayout Grid.Row="5">
+                    <Label Text="Date of start"/>
+                    <DatePicker Date="{Binding DateStarted}" 
+                                FontSize="22"/>
+                </StackLayout>
+                <StackLayout Grid.Row="6">
+                    <Label Text="Date of end"/>
+                    <DatePicker Date="{Binding DateEnded}" 
+                                FontSize="22"/>
+                </StackLayout>
+                <StackLayout Grid.Row="7">
+                    <Label Text="Priority"/>
+                    <Editor Text="{Binding Priority}" 
+                            Unfocused="Priority_TextChangedAsync"/>
+                </StackLayout>
+                <Button Grid.Row="8"
+                        Text="Delete"
+                        BackgroundColor="MediumVioletRed"
+                        Clicked="ButtonDelete_Clicked"/>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
